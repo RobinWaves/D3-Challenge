@@ -1,22 +1,22 @@
 // Define svg width and height
 var svgWidth = 960;
 var svgHeight = 500;
-// Set margins for chart
+// Set margins for scatter
 var margin = {
     top: 20,
     right: 40,
     bottom: 80,
     left: 100
 };
-// Define chart width and height (svg area - margins)
+// Define scatter width and height (svg area - margins)
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
-// Create an SVG wrapper, append an SVG group that holds the chart, and shift the group by left and top margins.
-var svg = d3.select(".chart")
+// Create an SVG wrapper, append a SVG group that holds the chart, 
+var svg = d3.select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
-// Append the SVG group
+// Append the SVG group and shift the group by left and top margins
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
@@ -60,16 +60,17 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
   censusData.forEach(data => {
       data.healthcare = +data.healthcare;
       data.poverty = +data.poverty;
-      data.povertyMoe = +data.povertyMoe;    
+      data.povertyMoe = +data.povertyMoe; 
+      data.age = +data.age;   
   });
   console.log(censusData);
 
   // xLinearScale function above csv import
-  var xLinearScale = xScale(hairData, chosenXAxis);
+  var xLinearScale = xScale(censusData, chosenXAxis);
 
   // Create y scale function
   var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(hairData, d => d.num_hits)])
+    .domain([0, d3.max(censusData, d => d.healthcare)])
     .range([height, 0]);
 
   // Create initial axis functions
@@ -88,11 +89,11 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
 
   // append initial circles
   var circlesGroup = chartGroup.selectAll("circle")
-    .data(hairData)
+    .data(censusData)
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    .attr("cy", d => yLinearScale(d.num_hits))
+    .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", 20)
     .attr("fill", "pink")
     .attr("opacity", ".5");
@@ -101,19 +102,19 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
   var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-  var hairLengthLabel = labelsGroup.append("text")
+  var povertyLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 20)
-    .attr("value", "hair_length") // value to grab for event listener
+    .attr("value", "poverty") // value to grab for event listener
     .classed("active", true)
-    .text("Hair Metal Ban Hair Length (inches)");
+    .text("Poverty");
 
-  var albumsLabel = labelsGroup.append("text")
+  var ageLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
-    .attr("value", "num_albums") // value to grab for event listener
+    .attr("value", "age") // value to grab for event listener
     .classed("inactive", true)
-    .text("# of Albums Released");
+    .text("Age");
 
   // append y axis
   chartGroup.append("text")
@@ -122,7 +123,7 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Number of Billboard 500 Hits");
+    .text("Healthcare");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
@@ -141,7 +142,7 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
 
         // functions here found above csv import
         // updates x scale for new data
-        xLinearScale = xScale(hairData, chosenXAxis);
+        xLinearScale = xScale(censusData, chosenXAxis);
 
         // updates x axis with transition
         xAxis = renderAxes(xLinearScale, xAxis);
@@ -153,78 +154,24 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
         circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
         // changes classes to change bold text
-        if (chosenXAxis === "num_albums") {
-          albumsLabel
+        if (chosenXAxis === "age") {
+          ageLabel
             .classed("active", true)
             .classed("inactive", false);
-          hairLengthLabel
+          povertyLabel
             .classed("active", false)
             .classed("inactive", true);
         }
         else {
-          albumsLabel
+          ageLabel
             .classed("active", false)
             .classed("inactive", true);
-          hairLengthLabel
+          povertyLabel
             .classed("active", true)
             .classed("inactive", false);
         }
       }
     });
-}).catch(function(error) {
-  console.log(error);
-});
-
-
-// Load data from data.csv
-d3.csv("assets/data/data.csv").then(censusData => {
-
-    // Print the census data
-    console.log(censusData);
-
-    // Cast as numbers
-    censusData.forEach(data => {
-        data.healthcare = +data.healthcare;
-        data.poverty = +data.poverty;
-        data.povertyMoe = +data.povertyMoe;    
-    });
-    console.log(censusData);
-
-    // Step 2: Create scale functions
-    var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(censusData, d => d.poverty)])
-      .range([0, width]);
-
-    var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(censusData, d => d.healthcare)])
-      .range([height, 0]);
-
-    // Step 3: Create axis functions
-    var bottomAxis = d3.axisBottom(xLinearScale);
-    var leftAxis = d3.axisLeft(yLinearScale);
-
-    // Step 4: Append Axes to the chart
-    // ==============================
-    chartGroup.append("g")
-      .attr("transform", `translate(0, ${height})`)
-      .call(bottomAxis);
-
-    chartGroup.append("g")
-      .call(leftAxis);
-
-    // Step 5: Create Circles for Scatter
-    var circlesGroup = chartGroup.selectAll("circle")
-    .data(censusData)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xLinearScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "15")
-    .attr("fill", "pink")
-    .attr("opacity", ".5");
-
-
-    
 }).catch(function(error) {
   console.log(error);
 });
