@@ -93,8 +93,14 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", 20)
-    .attr("fill", "pink")
+    .attr("fill", "steelblue")
     .attr("opacity", ".5");
+
+  var circleText = circlesGroup.append("text")
+  .text(d => d.abbr)
+  .classed("circleText", true)
+	.attr("dx", d => xLinearScale(d[chosenXAxis]))
+	.attr("dy", d => yLinearScale(d.healthcare));
 
   // Create group for two x-axis labels
   var labelsGroup = chartGroup.append("g")
