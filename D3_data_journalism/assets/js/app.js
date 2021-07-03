@@ -24,28 +24,26 @@ var chartGroup = svg.append("g")
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
-//----------------------------------------
-// function used for updating X-SCALE var upon click on axis label
+// ---------------------------------------- //
+// X-SCALE function - update var upon click on axis label
 function xScale(censusData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]), 
-            d3.max(censusData, d => d[chosenXAxis])
-    ])
+    .domain([ d3.min(censusData, d => d[chosenXAxis]), 
+              d3.max(censusData, d => d[chosenXAxis]) ])
     .range([0, width]);
-
   return xLinearScale;
 }
-// function used for updating Y-SCALE var upon click on axis label
-// function yScale(censusData, chosenYAxis) {
-//   // create scales
-//   var yLinearScale = d3.scaleLinear()
-//     .domain([0, d3.max(censusData, d => d[chosenYAxis])])
-//     .range([height, 0]);
-
-//   return yLinearScale;
-// }
-//----------------------------------------
+// ---------------------------------------- //
+// Y-SCALE function - update var upon click on axis label
+function yScale(censusData, chosenYAxis) {
+    //create scales
+    var yLinearScale = d3.scaleLinear()
+      .domain([ 0, d3.max(censusData, d => d[chosenYAxis]) ])
+      .range([height, 0]);
+    return yLinearScale;
+}
+// ---------------------------------------- //
 // function used for updating xAxis var upon click on axis label
 // function renderAxes(newXScale, xAxis) {
 //   var bottomAxis = d3.axisBottom(newXScale);
@@ -56,8 +54,9 @@ function xScale(censusData, chosenXAxis) {
 
 //   return xAxis;
 // }
+// ---------------------------------------- //
 
-// MAIN -- Retrieve data from the CSV file and execute everything below
+// MAIN -- Get data from the CSV file and execute  
 d3.csv("assets/data/data.csv").then((censusData, err) => {
   if (err) throw err;
 
@@ -75,12 +74,7 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
 
   // Initial X and Y Linear Scale - call functions
   var xLinearScale = xScale(censusData, chosenXAxis);
-  //var yLinearScale = xScale(censusData, chosenYAxis);
-
-   // Create y scale function
-  var yLinearScale = d3.scaleLinear()
-  .domain([0, d3.max(censusData, d => d.healthcare)])
-  .range([height, 0]);
+  var yLinearScale = yScale(censusData, chosenYAxis);
 
   // Create initial axis functions
   var bottomAxis = d3.axisBottom(xLinearScale);
