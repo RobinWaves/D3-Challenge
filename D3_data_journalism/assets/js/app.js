@@ -1,6 +1,6 @@
 // Define svg width and height
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 1000;
+var svgHeight = 600;
 // Set margins for scatter
 var margin = {
     top: 20,
@@ -173,8 +173,8 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
   var yLabelsGroup = chartGroup.append("g")
   var healthcareLabel = yLabelsGroup.append("text")
     .attr("transform", "rotate(-90)")
-    .attr("x", 0 - (height / 2)) // -200
-    .attr("y", 0 - margin.right) // -40
+    .attr("x", 0 - (height / 2)) // 
+    .attr("y", 0 - margin.right) // 
     .attr("value", "healthcare") // value to grab for event listener
     .classed("active", true)
     .text("Lacks Healthcare (%)");
