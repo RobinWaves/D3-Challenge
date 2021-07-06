@@ -1,6 +1,7 @@
 // Define svg width and height
 var svgWidth = 950;
 var svgHeight = 600;
+
 // Set margins for scatter
 var margin = {
     top: 20,
@@ -12,10 +13,12 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 // Create an SVG wrapper, append SVG that holds the chart
+// https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b
 var svg = d3.select("#scatter")
     .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+    .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+    //.attr("width", svgWidth)
+    //.attr("height", svgHeight);
 // Append the scatter group and shift the group by left and top margins
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -350,6 +353,8 @@ d3.csv("assets/data/data.csv").then((censusData, err) => {
         .classed("inactive", true);
     }
   });
+  
+
 }).catch(function(error) {
   console.log(error);
-});
+});  
