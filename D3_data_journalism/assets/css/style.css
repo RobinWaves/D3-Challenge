@@ -1,7 +1,7 @@
-/* .iframeContainer {
+/*#scatter {
   padding: 20px;
   border: 1px solid #e3e3e3;
-} */
+}*/
 
 /* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
 html {
@@ -11,13 +11,14 @@ html {
 
 body {
   /* Padding bottom by footer height */
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 h1 {
   text-align: center;
 }
-h2 {
+h3 {
   margin-top: 20px;
+  text-align: center;
 }
 
 #footer {
