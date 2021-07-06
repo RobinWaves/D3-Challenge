@@ -11,10 +11,13 @@ html {
 
 body {
   /* Padding bottom by footer height */
-  padding-bottom: 30px;
+  padding-bottom: 80px;
+  font-family: 'Times New Roman', serif;
 }
 h1 {
+  padding-top: 10px;
   text-align: center;
+  font-weight: bolder;
 }
 h3 {
   margin-top: 20px;
