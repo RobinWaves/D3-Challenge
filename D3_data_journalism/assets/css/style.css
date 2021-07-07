@@ -1,7 +1,7 @@
-/*#scatter {
+.iframeContainer {
   padding: 20px;
   border: 1px solid #e3e3e3;
-}*/
+}
 
 /* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
 html {
@@ -12,17 +12,19 @@ html {
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
-  font-family: 'Times New Roman', serif;
+  font-family: sans-serif;
+  background-color: #FEFEFE;
 }
+
 h1 {
   padding-top: 10px;
   text-align: center;
   font-weight: bolder;
 }
-h3 {
-  margin-top: 20px;
+h4 {
+  margin-top: 10px;
   text-align: center;
-}
+} 
 
 #footer {
   position: absolute;

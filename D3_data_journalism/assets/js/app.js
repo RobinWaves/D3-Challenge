@@ -1,12 +1,12 @@
 // Define svg width and height
-var svgWidth = 950;
-var svgHeight = 600;
+var svgWidth = 1200;
+var svgHeight = 800;
 
 // Set margins for scatter
 var margin = {
     top: 20,
     right: 40,
-    bottom: 80,
+    bottom: 90,
     left: 100
 };
 // Define scatter width and height (svg area - margins)
@@ -115,7 +115,7 @@ function renderYtext(circlesText, newYScale, chosenYAxis) {
 
     var toolTip = d3.tip()
     .attr("class", "d3-tip")
-    .offset([85, 65])
+    .offset([80, 55])
     .html(function(d) {
       if (chosenXAxis === "age") { // age years and all y axis %
         return (`${d.state}<br>${xlabel} ${d[chosenXAxis]} years<br>${ylabel} ${d[chosenYAxis]}%`); 

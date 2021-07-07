@@ -5,6 +5,7 @@
 }
 /* Selected X and Y Labels group */
 .active {
+  font-size: 18px;
   font-weight: bold;
   fill: #000;
   transition: fill 0.3s ease-out;
@@ -12,6 +13,7 @@
 }
 /* X and Y Labels group */
 .inactive {
+  font-size: 18px;
   font-weight: lighter;
   fill: #c9c9c9;
   transition: fill 0.3s ease-out;
@@ -24,10 +26,12 @@
 }
 /* X axis ticks */
 .x-axis {
+  font-size: 18px;
   font-weight: bold;
 }
 /* Y axis ticks */
 .y-axis {
+  font-size: 18px;
   font-weight: bold;
 }
 /* Scatter Circle Text -  font size dependent on radius, see app.js */
@@ -46,7 +50,7 @@
   display: block;
   margin: 0;
 }
-
+/* Tooltip */
 .d3-tip {
   padding: 6px;
   font-size: 12px;
