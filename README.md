@@ -1,4 +1,6 @@
-# D3-challenge - Data Journalism and D3 Newsroom
+# D3-challenge
+## Data Journalism and D3 Newsroom
+---
 
 In this assignment I was tasked with analyzing the current trends shaping people's lives, as well as creating charts, graphs, and interactive elements to help readers of a major metro newspaper understand the findings.
 
@@ -6,17 +8,19 @@ To enable the editor in running a series of feature stories about the health ris
 
 The data set included with the assignment is based on 2014 ACS 1-year estimates from the US Census Bureau.  The current data set includes data on rates of poverty, age, income, healtcare, smoking, and obesity by state.
 
-D3_data_journalism 
-    index.html - main file to run
-    assets
-        css
-            d3Style.css
-            style.css
-        js
-            app.js - main file to run for analysis
-        data
-            data.csv
-images
+Inside this reposity you will find:
+
+* D3_data_journalism - directory holding main files to run for analysis
+    * index.html - main file to run
+    * assets - direcory holding css, js and data files
+        * css
+            * d3Style.css
+            * style.css
+        * js
+            * app.js - main file to run for analysis
+        * data
+            * data.csv
+* images - screenshots of scatter plot
 
 Your Task
 Core Assignment: D3 Dabbler (Required Assignment)
