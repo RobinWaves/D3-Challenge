@@ -18,11 +18,12 @@ Inside this reposity you will find:
             * d3Style.css
             * style.css
         * js
-            * app.js - main file to run for analysis
+            * app.js - main file to run for analysis  
+            Includes core assignment and bonus assignment
         * data
             * data.csv 
 * images - screenshots of scatter plot and misc images needed for assignment.
 
-Using D3 an interactive scatter plot was created with each state represented as circle elements.  On the y axis you can choose healthcare, smokers and obesity.  On the x axis you can choose poverty, age and income.  These axis labels use click events and are actived when a user selects an axis.  Transitions from one axis to the next are animated and the range of axes are also updated.
+Using D3 an interactive scatter plot was created with each state represented as circle elements.  On the y axis you can choose healthcare, smokers and obesity.  On the x axis you can choose poverty, age and income.  When a user selects an axis click events are used on axes lables to activate and data is displayed.  Transitions from one axis to the next are animated and the range of axes are also updated.
 
 A D3 tool-tip is also implemented when a user hovers over the state circle.  The state and its respective values are displayed.  The circle is also increased in opacity and gets a black border when hovered.
